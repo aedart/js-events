@@ -132,6 +132,7 @@ class Dispatcher extends mix(Object).with(
         // Dispatch in the background
         this.timeMaster.addTimeout(TIMER_ID, () => {
             this._dispatchEvent(event, payload, halt);
+            this.timeMaster.remove(TIMER_ID);
         }, 0);
     }
 
