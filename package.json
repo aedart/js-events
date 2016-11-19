@@ -22,7 +22,8 @@
   },
   "homepage": "https://github.com/aedart/js-events#readme",
   "dependencies": {
-    "@aedart/js-service-provider": "^1.0.0"
+    "@aedart/js-service-provider": "^1.0.0",
+    "@aedart/js-timer": "^1.0.0"
   },
   "devDependencies": {
     "@aedart/js-ioc": "^1.0.0",
