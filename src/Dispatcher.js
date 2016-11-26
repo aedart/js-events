@@ -195,7 +195,7 @@ class Dispatcher extends mix(Object).with(
 
         // Fetch "handler" method if listener of type Listener
         if(listener instanceof Listener){
-            listener = listener.handle.bind(listener);
+            listener = listener.handle;
         }
 
         // Fail if listener is not a function / callback
