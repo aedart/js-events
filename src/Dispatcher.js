@@ -256,6 +256,7 @@ class Dispatcher extends mix(Object).with(
             return;
         }
 
+        listenerSet.add(listener);
         this.wildcardListeners.set(event, listenerSet);
     }
 
@@ -282,6 +283,7 @@ class Dispatcher extends mix(Object).with(
             return;
         }
 
+        listenerSet.add(listener);
         this.listeners.set(event, listenerSet);
     }
 
