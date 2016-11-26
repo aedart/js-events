@@ -56,7 +56,7 @@ class Dispatcher extends mix(Object).with(
     /**
      * Set listeners
      *
-     * @param {Map.<string, Set.<function>>} listeners Map of events and their associated listeners
+     * @param {Map.<string, Set.<function|Listener>>} listeners Map of events and their associated listeners
      */
     set listeners(listeners) {
         this[_listeners] = listeners;
@@ -65,7 +65,7 @@ class Dispatcher extends mix(Object).with(
     /**
      * Get listeners
      *
-     * @return {Map.<string, Set.<function>>} Map of events and their associated listeners
+     * @return {Map.<string, Set.<function|Listener>>} Map of events and their associated listeners
      */
     get listeners() {
         return this[_listeners];
@@ -74,7 +74,7 @@ class Dispatcher extends mix(Object).with(
     /**
      * Set wildcard Listeners
      *
-     * @param {Map.<string, Set.<function>>} listeners Map of wildcard events and their associated listeners
+     * @param {Map.<string, Set.<function|Listener>>} listeners Map of wildcard events and their associated listeners
      */
     set wildcardListeners(listeners) {
         this[_wildcardListeners] = listeners;
@@ -83,7 +83,7 @@ class Dispatcher extends mix(Object).with(
     /**
      * Get wildcard Listeners
      *
-     * @return {Map.<string, Set.<function>>} Map of wildcard events and their associated listeners
+     * @return {Map.<string, Set.<function|Listener>>} Map of wildcard events and their associated listeners
      */
     get wildcardListeners() {
         return this[_wildcardListeners];
@@ -168,7 +168,7 @@ class Dispatcher extends mix(Object).with(
      *
      * @param {string} event
      *
-     * @return {Array.<function>}
+     * @return {Array.<function|Listener>}
      */
     getListeners(event){
         let wildcardListeners = this._getWildcardListeners(event);
@@ -193,17 +193,13 @@ class Dispatcher extends mix(Object).with(
             listener = this.ioc.make(listener);
         }
 
-        // Fetch "handler" method if listener of type Listener
-        if(listener instanceof Listener){
-            listener = listener.handle;
+        // If listener is a callback function or instance of Listener, all is okay
+        if(listener instanceof Listener || typeof listener === 'function'){
+            return listener;
         }
 
-        // Fail if listener is not a function / callback
-        if(typeof listener !== 'function'){
-            throw new TypeError('Given listener must be a callback function or of the type "Listener"');
-        }
-
-        return listener;
+        // Means that something else was given... thus, we fail!
+        throw new TypeError('Given listener must be a callback function or of the type "Listener"');
     }
 
     /**
@@ -223,7 +219,12 @@ class Dispatcher extends mix(Object).with(
             let listener = listeners[i];
 
             // Execute the listener
-            let result = listener(event, payload);
+            let result = false;
+            if(listener instanceof Listener){
+                result = listener.handle(event, payload);
+            } else {
+                result = listener(event, payload);
+            }
 
             // Stop further execution, if we must halt and the
             // listener returned "false"
