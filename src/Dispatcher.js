@@ -45,6 +45,8 @@ class Dispatcher extends mix(Object).with(
      * @param {TimeMaster|null} [timeMaster]
      */
     constructor(ioc = null, timeMaster = null){
+        super();
+
         this.ioc = ioc;
         this.timeMaster = timeMaster;
         this.listeners = new Map();
@@ -329,7 +331,7 @@ class Dispatcher extends mix(Object).with(
      * @private
      */
     _matchesWildcard(event, wildcard){
-        return new RegExp("^" + wildcard.split("*").join(".*") + "$").test(event);
+        return new RegExp('^' + wildcard.split('*').join('.*') + '$').test(event);
     }
 }
 
