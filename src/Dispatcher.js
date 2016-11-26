@@ -173,7 +173,7 @@ class Dispatcher extends mix(Object).with(
     getListeners(event){
         let wildcardListeners = this._getWildcardListeners(event);
 
-        let regularListeners = (this.listeners.has(event)) ? this.listeners.get(event).values() : [];
+        let regularListeners = (this.listeners.has(event)) ? Array.from(this.listeners.get(event)): [];
 
         return wildcardListeners.concat(regularListeners);
     }
@@ -315,7 +315,7 @@ class Dispatcher extends mix(Object).with(
 
             // If event matches wildcard
             if(this._matchesWildcard(event, key)){
-                matchingListeners =  matchingListeners.concat(listeners.values());
+                matchingListeners =  matchingListeners.concat(Array.from(listeners));
             }
         });
 
