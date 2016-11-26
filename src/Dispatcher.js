@@ -145,9 +145,9 @@ class Dispatcher extends mix(Object).with(
      */
     forget(event){
         if(this._containsWildcard(event)){
-            this.wildcardListeners.set(event, new Set());
+            this.wildcardListeners.delete(event);
         } else {
-            this.listeners.set(event, new Set());
+            this.listeners.delete(event);
         }
     }
 
