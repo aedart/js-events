@@ -1,7 +1,7 @@
 'use strict';
 
 import Listener from './Listener';
-import { TimeMasterAware } from '@aedart/js-timer'
+import { TimeMasterAware } from '@aedart/js-timer';
 import { mix } from 'mixwith/src/mixwith';
 
 /**
