@@ -207,6 +207,62 @@ describe('Dispatcher Test', function(){
     });
 
     /************************************************************
+     * Subscribe tests
+     ***********************************************************/
+
+    describe('subscribe', function(){
+
+        it('can register event subscriber', function () {
+            let dispatcher = TestHelper.makeDispatcher();
+
+            let event = faker.random.word();
+
+            // Listeners
+            let listenerA = (e, p) => {
+                return true;
+            };
+
+            let listenerB = (e, p) => {
+                return true;
+            };
+
+            let listenerC = (e, p) => {
+                return true;
+            };
+
+            // Subscriber
+            let listeners = new Map();
+            listeners.set(event, [
+                listenerA,
+                listenerB,
+                listenerC,
+            ]);
+
+            let subscriber = TestHelper.makeSubscriber(listeners);
+
+            // Bind subscriber class - NOTE: This is not needed,
+            // yet might as well just test this part too...
+            let abstract = faker.random.uuid();
+            IoC.bind(abstract, () => {
+                return subscriber;
+            });
+
+            // Subscribe listeners
+            dispatcher.subscribe(abstract);
+
+            // Expect amount of listeners
+            let dispatcherListeners = dispatcher.getListeners(event);
+            expect(dispatcherListeners.length).toBe(3, 'Incorrect amount of listeners');
+
+            // Expect specific listeners
+            expect(dispatcherListeners.indexOf(listenerA)).not.toBe(-1, 'Listener A not registered');
+            expect(dispatcherListeners.indexOf(listenerB)).not.toBe(-1, 'Listener B not registered');
+            expect(dispatcherListeners.indexOf(listenerC)).not.toBe(-1, 'Listener C not registered');
+        });
+
+    });
+
+    /************************************************************
      * Dispatch (fire) tests
      ***********************************************************/
 
