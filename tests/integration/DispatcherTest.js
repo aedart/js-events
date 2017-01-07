@@ -464,4 +464,66 @@ describe('Dispatcher Test', function(){
         });
     });
 
+    /************************************************************
+     * Background Listeners tests
+     ***********************************************************/
+
+    describe('Dispatch (fire) Background Listeners', function(){
+
+        it('can process event in the background', function (done) {
+            let dispatcher = TestHelper.makeDispatcher();
+
+            let event = faker.random.word();
+            let payload = faker.random.uuid();
+            let delay = 500;
+
+            let amountExecuted = 0;
+
+            // Listeners
+            let listenerA = (e, p) => {
+                amountExecuted++;
+                return true;
+            };
+
+            let listenerB = (e, p) => {
+                amountExecuted++;
+                return true;
+            };
+
+            // Background listener
+            let listenerC = TestHelper.makeDummyBackgroundListener();
+            listenerC.processDelay = delay;
+
+            let listenerD = (e, p) => {
+                amountExecuted++;
+                return true;
+            };
+
+            // Listen for event
+            dispatcher.listen(event, listenerA);
+            dispatcher.listen(event, listenerB);
+            dispatcher.listen(event, listenerC);
+            dispatcher.listen(event, listenerD);
+
+            // Dispatch event
+            dispatcher.fire(event, payload);
+
+            // We expect only 3 to have been triggered... whereas the background
+            // listener will be processed in the future
+            expect(amountExecuted).toBe(3, 'Some listeners have not been executed');
+
+            let x = setTimeout(() => {
+                clearTimeout(x);
+
+                // The background listener's event and payload should
+                // now have been set... in other words, it should have
+                // been triggered / processed!
+                expect(listenerC.event).toBe(event, 'Incorrect event set');
+                expect(listenerC.payload).toBe(payload, 'Incorrect payload set');
+
+                done();
+            }, delay + 10);
+        });
+
+    });
 });
