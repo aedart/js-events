@@ -4,6 +4,7 @@ import Dispatcher from '../../src/Dispatcher';
 import EventServiceProvider from '../../src/Providers/EventServiceProvider';
 import EmptyListener from './EmptyListener';
 import DummyListener from './DummyListener';
+import DummyBackgroundListener from './DummyBackgroundListener';
 import CountingListener from './CountingListener';
 import Facade from '@aedart/js-facade';
 import IoC from '@aedart/js-ioc';
@@ -70,6 +71,24 @@ class TestHelper {
      */
     static get dummyListenerClass(){
         return DummyListener;
+    }
+
+    /**
+     * Returns a dummy background class (not initiated)
+     *
+     * @return {DummyBackgroundListener}
+     */
+    static get dummyBackgroundListener(){
+        return DummyBackgroundListener;
+    }
+
+    /**
+     * Returns a new (empty) dummy background listener
+     *
+     * @return {DummyBackgroundListener}
+     */
+    static makeDummyBackgroundListener(){
+        return new DummyBackgroundListener();
     }
 
     /**
