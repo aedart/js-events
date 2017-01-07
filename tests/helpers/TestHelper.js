@@ -1,6 +1,7 @@
 'use strict';
 
 import Dispatcher from '../../src/Dispatcher';
+import Subscriber from '../../src/Subscribers/Subscriber';
 import EventServiceProvider from '../../src/Providers/EventServiceProvider';
 import EmptyListener from './EmptyListener';
 import DummyListener from './DummyListener';
@@ -54,6 +55,23 @@ class TestHelper {
      */
     static makeDispatcher(ioc = null, timeMaster = null){
         return new Dispatcher(ioc, timeMaster);
+    }
+
+    /**
+     * Returns a new Subscriber
+     *
+     * @param {Map.<string, Array.<string|function|Listener>>|null} listeners A map of events and their listeners
+     *
+     * @return {Subscriber}
+     */
+    static makeSubscriber(listeners = null){
+        let subscriber = new Subscriber();
+
+        if(listeners !== null){
+            subscriber.listeners = listeners;
+        }
+
+        return subscriber;
     }
 
     /**
