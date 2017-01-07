@@ -1,7 +1,7 @@
 {
   "name": "@aedart/js-events",
   "version": "0.1.0",
-  "description": "EXPERIMENT",
+  "description": "Event Dispatcher for ES6",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/karma start karma.conf.js"
