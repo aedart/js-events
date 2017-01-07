@@ -1,6 +1,7 @@
 'use strict';
 
 import Listener from './Listeners/Listener';
+import Subscriber from './Subscribers/Subscriber';
 import { TimeMasterAware } from '@aedart/js-timer';
 import { IoCAware } from '@aedart/js-service-provider';
 import { mix } from 'mixwith/src/mixwith';
@@ -117,6 +118,21 @@ class Dispatcher extends mix(Object).with(
     }
 
     /**
+     * Register an event subscriber
+     *
+     * @param {string|Subscriber} subscriber
+     *
+     * @throws {TypeError} If subscriber is invalid
+     */
+    subscribe(subscriber){
+        // Resolve the subscriber
+        subscriber = this.makeSubscriber(subscriber);
+
+        // Subscribe...
+        subscriber.subscribe(this);
+    }
+
+    /**
      * Dispatch an event
      *
      * @param {string} event            Event id
@@ -200,6 +216,31 @@ class Dispatcher extends mix(Object).with(
 
         // Means that something else was given... thus, we fail!
         throw new TypeError('Given listener must be a callback function or of the type "Listener"');
+    }
+
+    /**
+     * Returns a subscriber instance, either as it has been given
+     * or resolved from the IoC
+     *
+     * @param {string|Subscriber} subscriber
+     *
+     * @return {Subscriber}
+     *
+     * @throws {TypeError} If subscriber is invalid
+     */
+    makeSubscriber(subscriber){
+        // Resolve subscriber from IoC, if string given
+        if(typeof subscriber === 'string'){
+            subscriber = this.ioc.make(subscriber);
+        }
+
+        // Check that subscriber is instance of Subscriber
+        if(subscriber instanceof Subscriber){
+            return subscriber;
+        }
+
+        // Means that something else was given... thus, we fail!
+        throw new TypeError('Given subscriber must be instance of "Subscriber"');
     }
 
     /**
