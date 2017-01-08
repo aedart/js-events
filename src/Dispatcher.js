@@ -260,11 +260,16 @@ class Dispatcher extends mix(Object).with(
             let listener = listeners[i];
 
             // Execute the listener
-            let result = false;
+            let result = null;
             if(listener instanceof Listener){
                 result = listener.handle(event, payload);
             } else {
                 result = listener(event, payload);
+            }
+
+            // If result not set...
+            if(result === null || result === undefined){
+                result = true;
             }
 
             // Stop further execution, if we must halt and the
