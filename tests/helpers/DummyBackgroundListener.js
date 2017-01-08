@@ -27,10 +27,6 @@ const _payload = Symbol('payload');
  */
 class DummyBackgroundListener extends BackgroundListener{
 
-    constructor(){
-        super();
-    }
-
     /**
      * Set event
      *
