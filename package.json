@@ -22,11 +22,12 @@
   },
   "homepage": "https://github.com/aedart/js-events#readme",
   "dependencies": {
-    "@aedart/js-service-provider": "^1.0.0",
-    "@aedart/js-timer": "^1.0.0"
+    "@aedart/js-service-provider": "^1.2.0",
+    "@aedart/js-timer": "^1.2.0",
+    "@vcas/js-mixin": "~1.0"
   },
   "devDependencies": {
-    "@aedart/js-ioc": "^1.0.0",
+    "@aedart/js-ioc": "^1.2.0",
     "babel-plugin-external-helpers": "^6.18.0",
     "babel-plugin-transform-builtin-extend": "^1.1.0",
     "babel-preset-es2015-rollup": "^1.2.0",
