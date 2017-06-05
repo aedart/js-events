@@ -1,6 +1,6 @@
 {
   "name": "@aedart/js-events",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Event Dispatcher for ES6",
   "main": "index.js",
   "scripts": {
