@@ -2,7 +2,7 @@
 
 import Listener from './Listener';
 import { TimeMasterAware } from '@aedart/js-timer';
-import { mix } from 'mixwith/src/mixwith';
+import mix from '@vcas/js-mixin';
 
 /**
  * process Delay symbol

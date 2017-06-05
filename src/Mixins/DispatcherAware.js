@@ -2,7 +2,7 @@
 
 import { IoCFacade } from '@aedart/js-service-provider';
 import { DISPATCHER_CLASS } from './../Contracts/Services';
-import {Mixin} from 'mixwith/src/mixwith';
+import {DeclareMixin} from '@vcas/js-mixin';
 
 /**
  * dispatcher symbol
@@ -17,7 +17,7 @@ const _dispatcher = Symbol('dispatcher');
  *
  * @return {DispatcherAware}
  */
-export default Mixin((superClass) => class DispatcherAware extends superClass {
+export default DeclareMixin((superClass) => class DispatcherAware extends superClass {
 
     /**
      * Set dispatcher
