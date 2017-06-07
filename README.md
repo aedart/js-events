@@ -52,7 +52,7 @@ Once you have registered the event service provider, you can mixin the event `Di
 'use strict';
 
 import { DispatcherAware } from '@aedart/js-events'
-import { mix } from 'mixwith/src/mixwith';
+import { mix } from '@vestergaard-company/js-mixin';
 
 class MyApplication extends mix(Object).with(
     DispatcherAware
@@ -80,7 +80,7 @@ The easiest way to listen for event, is via callback listeners. Once the event i
 'use strict';
 
 import { DispatcherAware } from '@aedart/js-events'
-import { mix } from 'mixwith/src/mixwith';
+import { mix } from '@vestergaard-company/js-mixin';
 
 class MyApplication extends mix(Object).with(
     DispatcherAware
@@ -133,7 +133,7 @@ export default NotifyUser;
 
 import NotifyUser from './MyListeners/NotifyUser';
 import { DispatcherAware } from '@aedart/js-events'
-import { mix } from 'mixwith/src/mixwith';
+import { mix } from '@vestergaard-company/js-mixin';
 
 class MyApplication extends mix(Object).with(
     DispatcherAware
@@ -195,7 +195,7 @@ export default MySubscriber;
 
 import MySubscriber from './Subscribers/MySubscriber';
 import { DispatcherAware } from '@aedart/js-events'
-import { mix } from 'mixwith/src/mixwith';
+import { mix } from '@vestergaard-company/js-mixin';
 
 class MyApplication extends mix(Object).with(
     DispatcherAware
@@ -219,7 +219,7 @@ To dispatch an event, you simply invoke the `fire` method on the dispatcher.
 'use strict';
 
 import { DispatcherAware } from '@aedart/js-events'
-import { mix } from 'mixwith/src/mixwith';
+import { mix } from '@vestergaard-company/js-mixin';
 
 class MyApplication extends mix(Object).with(
     DispatcherAware
@@ -251,7 +251,7 @@ This means is that a `setTimeout` is created, with `0` delay, in which all regis
 'use strict';
 
 import { DispatcherAware } from '@aedart/js-events'
-import { mix } from 'mixwith/src/mixwith';
+import { mix } from '@vestergaard-company/js-mixin';
 
 class MyApplication extends mix(Object).with(
     DispatcherAware
