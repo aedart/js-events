@@ -4,7 +4,7 @@ import Listener from './Listeners/Listener';
 import Subscriber from './Subscribers/Subscriber';
 import { TimeMasterAware } from '@aedart/js-timer';
 import { IoCAware } from '@aedart/js-service-provider';
-import mix from '@vcas/js-mixin';
+import mix from '@vestergaard-company/js-mixin';
 
 /**
  * listeners symbol

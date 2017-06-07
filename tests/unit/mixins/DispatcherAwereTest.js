@@ -3,7 +3,7 @@
 import DispatcherAware from '../../../src/Mixins/DispatcherAware';
 import Dispatcher from '../../../src/Dispatcher';
 import TestHelper from '../../helpers/TestHelper';
-import mix from '@vcas/js-mixin';
+import mix from '@vestergaard-company/js-mixin';
 
 describe('Dispatcher Aware Mixin', function(){
 

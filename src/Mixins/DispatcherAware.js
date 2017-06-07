@@ -2,7 +2,7 @@
 
 import { IoCFacade } from '@aedart/js-service-provider';
 import { DISPATCHER_CLASS } from './../Contracts/Services';
-import {DeclareMixin} from '@vcas/js-mixin';
+import {DeclareMixin} from '@vestergaard-company/js-mixin';
 
 /**
  * dispatcher symbol
